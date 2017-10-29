@@ -1,5 +1,7 @@
 public class MiniMax {
 
+    //thing
+
     /*
     * @param board: a 3x3 2d array with values -1, 0, 1. 1 being maximizer, 0 being empty, -1 being minimizer.
     *
