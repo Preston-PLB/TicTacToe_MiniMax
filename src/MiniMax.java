@@ -1,6 +1,6 @@
 public class MiniMax {
 
-    public int minimax(int[][] board, boolean maximizer){
+    public static int minimax(int[][] board, boolean maximizer){
         if(isFull(board)){
             return evaluate(board);
         }
@@ -28,6 +28,7 @@ public class MiniMax {
                         int[][] temp = board;
                         temp[y][x] = -1;
                         int score = minimax(temp, !maximizer);
+
                         if(score < bestScore){
                             bestScore = score;
                         }
@@ -45,7 +46,7 @@ public class MiniMax {
     * @return return arbitrary integer. if positive then maximizer wins, if negative minimizer wins, if 0 either no one has won or stalemate.
     *
     * */
-    private int evaluate(int[][] board){
+    private static int evaluate(int[][] board){
         //check rows
         for(int y = 0; y<3; y++){
             int sum = board[y][0]+board[y][1]+board[y][2];
@@ -90,7 +91,7 @@ public class MiniMax {
      *
      * @return true if the board is full of 1's or/and -1's. False if there are 0's (there are empty spots).
      */
-    private boolean isFull(int[][] board){
+    private static boolean isFull(int[][] board){
         for(int y = 0; y<3; y++){
            for(int x = 0; x<3; x++){
                //yes this is syntactically valid
