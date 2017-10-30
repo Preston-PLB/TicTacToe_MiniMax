@@ -1,6 +1,6 @@
 public class Move {
 
-    int y, x, player;
+    private int y, x, player, score;
 
     public Move(){
         y = x = player = 0;
@@ -23,4 +23,6 @@ public class Move {
     public int getY() {
         return y;
     }
+
+
 }

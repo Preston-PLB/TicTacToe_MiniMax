@@ -2,7 +2,7 @@ public class MiniMax {
 
     public static int minimax(int[][] board, boolean maximizer){
         if(isFull(board)){
-            return evaluate(board);
+            return evaluate(new Board(board));
         }
 
         if(maximizer) {
@@ -46,42 +46,80 @@ public class MiniMax {
     * @return return arbitrary integer. if positive then maximizer wins, if negative minimizer wins, if 0 either no one has won or stalemate.
     *
     * */
-    private static int evaluate(int[][] board){
+    private static int evaluate(Board board){
+        int[][] b = board.getBoard();
+
+        //check for wins
+
         //check rows
         for(int y = 0; y<3; y++){
-            int sum = board[y][0]+board[y][1]+board[y][2];
-            if(sum == 3){
-                return 10;
-            }else if(sum == -3){
-                return -10;
+            int sum = b[y][0]+b[y][1]+b[y][2];
+            if(sum == 3 || sum == -3){
+                return 100*sum;
             }
         }
         //check columns
         for(int x = 0; x<3; x++){
-            int sum = board[0][x]+board[1][x]+board[2][x];
-            if(sum == 3){
-                return 10;
-            }else if(sum == -3){
-                return -10;
+            int sum = b[0][x]+b[1][x]+b[2][x];
+            if(sum == 3 || sum == -3){
+                return 100*sum;
             }
         }
         //if the above seems backwards, trust me it's not. Step through this code line by line and you'll see
 
         //check diags
-        int leftRightDiag = board[0][0]+board[1][1]+board[2][2];
-        if(leftRightDiag == 3){
-            return 10;
-        }else if(leftRightDiag == -3){
-            return -10;
+        int leftRightDiag = b[0][0]+b[1][1]+b[2][2];
+        if(leftRightDiag == 3 || leftRightDiag == -3){
+            return 100*leftRightDiag;
         }
 
-        int RightLeftDiag = board[0][2]+board[1][1]+board[2][0];
-        if(RightLeftDiag == 3){
-            return 10;
-        }else if(RightLeftDiag == -3){
-            return -10;
+        int RightLeftDiag = b[0][2]+b[1][1]+b[2][0];
+        if(RightLeftDiag == 3 || RightLeftDiag == -3){
+            return 100*RightLeftDiag;
         }
 
+        //check for partials
+
+        //check rows
+        for(int y = 0; y<3; y++){
+            int sum = b[y][0]+b[y][1];
+            if(sum == 2 || sum == -2){
+                return 10*sum;
+            }
+            sum = b[y][1]+b[y][2];
+            if(sum == 2 || sum == -2){
+                return 10*sum;
+            }
+        }
+
+        for(int x = 0; x<3; x++){
+            int sum = b[0][x]+b[1][x];
+            if(sum == 2 || sum == -2){
+                return 10*sum;
+            }
+            sum = b[1][x]+b[2][x];
+            if(sum == 2 || sum == -2){
+                return 10*sum;
+            }
+        }
+
+        //check diag partials
+        int sum = b[0][0]+b[1][1];
+        if(sum == 2 || sum == -2){
+            return 10*sum;
+        }
+        sum = b[1][1]+b[2][2];
+        if(sum == 2 || sum == -2){
+            return 10*sum;
+        }
+        sum = b[0][2]+b[1][1];
+        if(sum == 2 || sum == -2){
+            return 10*sum;
+        }
+        sum = b[1][1]+b[2][0];
+        if(sum == 2 || sum == -2){
+            return 10*sum;
+        }
 
         return 0;
     }
