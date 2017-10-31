@@ -29,4 +29,32 @@ public class Board {
         return board[y][x] == 0;
     }
 
+    public boolean isFull(){
+        for(int y = 0; y<3; y++){
+            for(int x = 0; x<3; x++){
+                //yes this is syntactically valid
+                if(board[y][x] == 0) return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean rowEmpty(int row){
+        for(int i = 0; i<3; i++){
+            if(board[row][i] != 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean colEmpty(int col){
+        for(int i = 0; i<3; i++){
+            if(board[i][col] != 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
